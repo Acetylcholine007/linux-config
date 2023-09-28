@@ -11,6 +11,9 @@ local fb_actions = require "telescope".extensions.file_browser.actions
 
 telescope.setup {
   defaults = {
+    file_ignore_patterns = {
+      "node_modules"
+    },
     mappings = {
       n = {
         ["q"] = actions.close
@@ -42,27 +45,42 @@ telescope.setup {
 
 telescope.load_extension("file_browser")
 
-vim.keymap.set('n', ';f',
+vim.keymap.set('n', '<leader>sf',
   function()
     builtin.find_files({
-      no_ignore = false,
-      hidden = true
+      desc = '[S]earch [F]iles',
+      no_ignore = true,
+      hidden = true,
     })
   end)
-vim.keymap.set('n', ';r', function()
-  builtin.live_grep()
+vim.keymap.set('n', '<leader>sg', function()
+  builtin.live_grep({
+    desc = '[S]earch current [W]ord',
+    no_ignore = true,
+    hidden = true,
+  })
 end)
 vim.keymap.set('n', '\\\\', function()
   builtin.buffers()
 end)
-vim.keymap.set('n', ';t', function()
-  builtin.help_tags()
+vim.keymap.set('n', '<leader>sh', function()
+  builtin.help_tags({ desc = '[S]earch [H]elp' })
 end)
-vim.keymap.set('n', ';;', function()
+vim.keymap.set('n', '<leader>sr', function()
   builtin.resume()
 end)
-vim.keymap.set('n', ';e', function()
-  builtin.diagnostics()
+vim.keymap.set('n', '<leader>sd', function()
+  builtin.diagnostics({ desc = '[S]earch [D]iagnostics' })
+end)
+vim.keymap.set('n', '<leader>gf', function()
+  builtin.git_files({ desc = 'Search [G]it [F]iles' })
+end)
+vim.keymap.set('n', '<leader>sw', function()
+  builtin.grep_string({
+    desc = '[S]earch current [W]ord',
+    no_ignore = true,
+    hidden = true,
+  })
 end)
 vim.keymap.set("n", "sf", function()
   telescope.extensions.file_browser.file_browser({
@@ -76,9 +94,3 @@ vim.keymap.set("n", "sf", function()
     layout_config = { height = 40 }
   })
 end)
-vim.keymap.set('n', '<leader>gf', require('telescope.builtin').git_files, { desc = 'Search [G]it [F]iles' })
-vim.keymap.set('n', '<leader>sf', require('telescope.builtin').find_files, { desc = '[S]earch [F]iles' })
-vim.keymap.set('n', '<leader>sh', require('telescope.builtin').help_tags, { desc = '[S]earch [H]elp' })
-vim.keymap.set('n', '<leader>sw', require('telescope.builtin').grep_string, { desc = '[S]earch current [W]ord' })
-vim.keymap.set('n', '<leader>sg', require('telescope.builtin').live_grep, { desc = '[S]earch by [G]rep' })
-vim.keymap.set('n', '<leader>sd', require('telescope.builtin').diagnostics, { desc = '[S]earch [D]iagnostics' })
