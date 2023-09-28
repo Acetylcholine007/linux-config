@@ -39,6 +39,12 @@ packer.startup(function(use)
     "kylechui/nvim-surround",
     tag = "*" -- Use for stability; omit to use `main` branch for the latest features
   })
+  use({
+    "ThePrimeagen/harpoon",
+    requires = {
+      "nvim-lua/plenary.nvim",
+    }
+  })
 
   use 'nvimdev/lspsaga.nvim' -- LSP UIs
   use 'L3MON4D3/LuaSnip'

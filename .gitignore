@@ -1,4 +1,3 @@
-*
-!.gitignore
-!nvim
-!tmux
+htop
+nextjs-nodejs
+vscode-sqltools
