@@ -26,6 +26,7 @@ packer.startup(function(use)
   use 'mg979/vim-visual-multi'
   use 'mbbill/undotree'
   use 'tpope/vim-fugitive'
+  use 'rbong/vim-flog'
   use {
     "nvim-neo-tree/neo-tree.nvim",
     branch = "v3.x",
