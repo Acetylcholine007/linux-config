@@ -4,6 +4,7 @@ local status, nvim_lsp = pcall(require, "lspconfig")
 if (not status) then return end
 
 local protocol = require('vim.lsp.protocol')
+local util = require('lspconfig/util')
 
 local augroup_format = vim.api.nvim_create_augroup("Format", { clear = true })
 local enable_format_on_save = function(_, bufnr)
@@ -82,6 +83,21 @@ nvim_lsp.tsserver.setup {
 nvim_lsp.sourcekit.setup {
   on_attach = on_attach,
   capabilities = capabilities,
+}
+
+nvim_lsp.gopls.setup {
+  on_attach = on_attach,
+  capabilities = capabilities,
+  cmd = { "gopls" },
+  filetypes = { "go", "gomod", "gowork", "gompl" },
+  root_dir = util.root_pattern("go.work", "go.mod", ".git"),
+  settings = {
+    completeUnimported = true,
+    usePlaceholder = true,
+    analyses = {
+      unusedParams = true
+    }
+  }
 }
 
 nvim_lsp.lua_ls.setup {
