@@ -47,8 +47,12 @@ packer.startup(function(use)
     }
   })
 
+  use({
+    "L3MON4D3/LuaSnip",
+    tag = "v2.*",
+    run = "make install_jsregexp",
+  })
   use 'nvimdev/lspsaga.nvim' -- LSP UIs
-  use 'L3MON4D3/LuaSnip'
   use {
     'nvim-treesitter/nvim-treesitter',
     run = function() require('nvim-treesitter.install').update({ with_sync = true }) end,
